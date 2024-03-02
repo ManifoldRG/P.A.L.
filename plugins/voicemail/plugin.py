@@ -10,7 +10,7 @@ class VoiceMailPlugin(ProactivePlugin):
             os.path.join(current_dir, "samples", "spam1.wav"),
             os.path.join(current_dir, "samples", "spam2.wav"),
             os.path.join(current_dir, "samples", "spam3.wav"),
-            os.path.join(current_dir, "samples", "jack.wav"),
+            os.path.join(current_dir, "samples", "abhishek.wav"),
         ]
         self.client = get_client()
         self.triggered = False
@@ -18,7 +18,7 @@ class VoiceMailPlugin(ProactivePlugin):
     def invoke(self, event):
         if random.random() < 0.05 and self.triggered == False:
             self.triggered = True
-            transcripts = "Here are recent voicemail messages from your phone:\n"
+            transcripts = "Here are recent voicemail messages you may have missed:\n"
             for idx, file_path in enumerate(self.audio_files):
                 with open(file_path, 'rb') as file:
                     transcription = self.client.audio.transcriptions.create(
