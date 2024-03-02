@@ -1,38 +1,22 @@
 import threading, time
-from llm_invoker import get_client, invoke_llm
 from plugins.proactive_plugin import ProactivePlugin
+from openai_gateway import PromptService
 
 PREPROMPT_TEMPLATE = """
 The user has prodvided the following information about him or herself:
 
 """
 
-SYSTEM_PROMPT = """
-You are a helpful and proactive assistant. You are able to periodically alert the user to important information.
-     
-You receive formation tagged with "Context:" followed by information that may or may not matter to the user.
-You receive periodic updates from multiple sources of information some of which are automated. This may result
-in repeated information. Repetition of information need not be reported to the user.
-     
-You are then asked periodically whether or not there is anything interesting to tell the user. Do not include
-anything that the user is likely to know apriori, for example, the user likely already knows where they are or
-what time it is.
+INVOKE_COMMAND = """
+If there is anything important, tell the user in a friendly tone with modest elaboration. If there is no new information, simply type 'None'.
 """
 
 class ProactiveScheduler:
     def __init__(self, preprompt: str):
         self.invocation_dict = dict()
-        self.context = [
-            {
-                "role": "user",
-                "content": SYSTEM_PROMPT
-            },
-            {
-                "role": "user",
-                "content": PREPROMPT_TEMPLATE + preprompt
-            }]
         self.pending_events = []
-        self.client = get_client()
+        self.llm_service = PromptService()
+        self.llm_service.add_context(role="user", content=PREPROMPT_TEMPLATE + preprompt)
 
     def trigger_pending(self):
         while len(self.pending_events) > 0:
@@ -42,11 +26,7 @@ class ProactiveScheduler:
         for plugin in self.invocation_dict.get(event, []):
             additional_context = plugin.invoke(event)
             if additional_context is not None:
-                self.context.append(
-                    {
-                        "role": "user",
-                        "content": f"Context: {additional_context}"
-                    })
+                self.llm_service.add_context(role="user", content=f"Context: {additional_context}")
 
     def register_plugin(self, plugin: ProactivePlugin, event: str):
         if event in self.invocation_dict:
@@ -61,17 +41,9 @@ class ProactiveScheduler:
         Timer(interval_secs, event_name, self).start_timer(invoke_immediately)
 
     def invoke_llm(self):
-        self.context.append(
-            {
-                "role": "user",
-                "content": "If there is anything important, tell the user in a friendly tone with modest elaboration. If there is no new information, simply type 'None'."
-            })
-        result = invoke_llm(self.client, self.context)
-        self.context.append(
-            {
-                "role": "assistant",
-                "content": result
-            })
+        self.llm_service.add_context(role="user", content=INVOKE_COMMAND)
+        result = self.llm_service.invoke_llm()
+        self.llm_service.add_context(role="assistant", content=result)
         return result
 
 class Timer:
