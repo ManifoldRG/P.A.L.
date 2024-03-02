@@ -2,7 +2,7 @@ import random
 import time
 
 from proactive_scheduler import ProactiveScheduler
-
+from plugins.proactive_plugin import ProactivePlugin
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
@@ -13,30 +13,33 @@ I have the following friends:
 - Manny Miller"""
 
 
-class BitcoinPlugin:
+class BitcoinPlugin(ProactivePlugin):
     def __init__(self):
-        self.price = 60_000.
+        self.price = 60_000.0
+
     def invoke(self, event):
         if random.random() < 0.05:
             self.price = 100_000
         if random.random() < 0.05:
             self.price = 0
         return f"The price of bitcoin is ${self.price}."
-    
 
-class FriendPlugin:
+
+class FriendPlugin(ProactivePlugin):
     def __init__(self):
         self.triggered = False
+
     def invoke(self, event):
         if random.random() < 0.05 and self.triggered == False:
             self.triggered = True
             return "Jack Hill is present near you. He is available for lunch."
         return None
-    
 
-class ArxivPlugin:
+
+class ArxivPlugin(ProactivePlugin):
     def __init__(self):
         self.triggered = False
+
     def invoke(self, event):
         if random.random() < 0.05 and self.triggered == False:
             self.triggered = True
