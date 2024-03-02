@@ -164,6 +164,3 @@ NEARBY_PLACES_LIST = [
         },
     ]
 ]
-
-places = NearbyPlacesPlugin()
-print(places.get_nearby_places())
