@@ -10,7 +10,10 @@ Jack is heavily invested in bitcoin.
 
 I have the following friends:
 - Jack Hill
-- Manny Miller"""
+- Manny Miller
+
+I enjoy coffee and reading
+"""
 
 
 class BitcoinPlugin(ProactivePlugin):
@@ -50,11 +53,21 @@ Author: Manny Miller"""
         return None
 
 
+class LocationPlugin(ProactivePlugin):
+    def __init__(self):
+        self.triggered = False
+
+    def invoke(self, event):
+        if random.random() < 0.05 and self.triggered == False:
+            return NearbyPlacesPlugin().get_nearby_places()
+
+
 scheduler = ProactiveScheduler(USER_PROMPT)
 scheduler.start_timer(interval_secs=1, event_name="every_second")
 scheduler.register_plugin(BitcoinPlugin(), "every_second")
 scheduler.register_plugin(FriendPlugin(), "every_second")
 scheduler.register_plugin(ArxivPlugin(), "every_second")
+scheduler.register_plugin(LocationPlugin(), "every_second")
 
 
 t = time.time()
