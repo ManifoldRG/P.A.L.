@@ -2,21 +2,12 @@ import threading, time
 from plugins.proactive_plugin import ProactivePlugin
 from openai_gateway import PromptService
 
-PREPROMPT_TEMPLATE = """
-The user has prodvided the following information about him or herself:
-
-"""
-
-INVOKE_COMMAND = """
-If there is anything important, tell the user in a friendly tone with modest elaboration. If there is no new information, simply type 'None'.
-"""
 
 class ProactiveScheduler:
     def __init__(self, preprompt: str):
         self.invocation_dict = dict()
         self.pending_events = []
-        self.llm_service = PromptService()
-        self.llm_service.add_context(role="user", content=PREPROMPT_TEMPLATE + preprompt)
+        self.llm_service = PromptService(prompt_name='default', preprompt=preprompt)
 
     def trigger_pending(self):
         while len(self.pending_events) > 0:
@@ -41,7 +32,6 @@ class ProactiveScheduler:
         Timer(interval_secs, event_name, self).start_timer(invoke_immediately)
 
     def invoke_llm(self):
-        self.llm_service.add_context(role="user", content=INVOKE_COMMAND)
         result = self.llm_service.invoke_llm()
         self.llm_service.add_context(role="assistant", content=result)
         return result
