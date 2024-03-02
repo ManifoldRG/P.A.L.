@@ -11,6 +11,8 @@ Jack is heavily invested in bitcoin.
 I have the following friends:
 - Jack Hill
 - Manny Miller
+- Abhishek also an AI startup founder
+- Manny Miller is an AI Researche
 
 I enjoy coffee and reading
 """
