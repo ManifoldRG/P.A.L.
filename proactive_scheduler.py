@@ -1,6 +1,6 @@
 import threading, time
 from llm_invoker import get_client, invoke_llm
-from proactive_plugin import ProactivePlugin
+from plugins.proactive_plugin import ProactivePlugin
 
 PREPROMPT_TEMPLATE = """
 The user has prodvided the following information about him or herself:
