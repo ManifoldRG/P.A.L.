@@ -1,10 +1,10 @@
 import os
 from openai import OpenAI
+from utils import get_client
 
 class PromptService:
     def __init__(self):
-        self.key = os.environ.get("OPENAI_KEY")
-        self.client = OpenAI(api_key=self.key)
+        self.client = get_client()
         self.context = []
         self.system_content = """
         You are a helpful and proactive assistant. You are able to periodically alert the user to important information.
