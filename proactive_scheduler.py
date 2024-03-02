@@ -7,6 +7,10 @@ The user has prodvided the following information about him or herself:
 
 """
 
+INVOKE_COMMAND = """
+If there is anything important, tell the user in a friendly tone with modest elaboration. If there is no new information, simply type 'None'.
+"""
+
 class ProactiveScheduler:
     def __init__(self, preprompt: str):
         self.invocation_dict = dict()
@@ -37,8 +41,7 @@ class ProactiveScheduler:
         Timer(interval_secs, event_name, self).start_timer(invoke_immediately)
 
     def invoke_llm(self):
-        invoke_command = "If there is anything important, tell the user in a friendly tone with modest elaboration. If there is no new information, simply type 'None'."
-        self.llm_service.add_context(role="user", content=invoke_command)
+        self.llm_service.add_context(role="user", content=INVOKE_COMMAND)
         result = self.llm_service.invoke_llm()
         self.llm_service.add_context(role="assistant", content=result)
         return result
