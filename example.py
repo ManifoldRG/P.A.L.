@@ -44,24 +44,12 @@ Author: Manny Miller"""
         return None
 
 
-class LocationPlugin(ProactivePlugin):
-    def __init__(self):
-        self.triggered = False
-
-    def invoke(self, event):
-        if random.random() < 0.05 and self.triggered == False:
-            return NearbyPlacesPlugin().get_nearby_places()
-
-
 scheduler = ProactiveScheduler(USER_PROMPT)
 scheduler.start_timer(interval_secs=1, event_name="every_second")
 scheduler.register_plugin(BitcoinPlugin(), "every_second")
 scheduler.register_plugin(ArxivPlugin(), "every_second")
-<<<<<<< HEAD
-scheduler.register_plugin(LocationPlugin(), "every_second")
-=======
 scheduler.register_plugin(VoiceMailPlugin(), "every_second")
->>>>>>> 8a1e4ef4f87441ce02ab083776589f76db7a22fb
+scheduler.register_plugin(LocationPlugin(), "every_second")
 
 
 t = time.time()
