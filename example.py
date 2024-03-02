@@ -3,19 +3,19 @@ import time
 
 from proactive_scheduler import ProactiveScheduler
 from plugins.proactive_plugin import ProactivePlugin
+from plugins.voicemail.plugin import VoiceMailPlugin
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
-Jack is heavily invested in bitcoin.
+
+I am a busy startup founder and often get a ton of miss phone calls.
+Let me know if i have any important voicemails. plase ignore the spam.
 
 I have the following friends:
-- Jack Hill
-- Manny Miller
 - Abhishek also an AI startup founder
-- Manny Miller is an AI Researche
+- Manny Miller is an AI Researcher
 
-I enjoy coffee and reading
-"""
+I like coffee and reading"""
 
 
 class BitcoinPlugin(ProactivePlugin):
@@ -28,17 +28,6 @@ class BitcoinPlugin(ProactivePlugin):
         if random.random() < 0.05:
             self.price = 0
         return f"The price of bitcoin is ${self.price}."
-
-
-class FriendPlugin(ProactivePlugin):
-    def __init__(self):
-        self.triggered = False
-
-    def invoke(self, event):
-        if random.random() < 0.05 and self.triggered == False:
-            self.triggered = True
-            return "Jack Hill is present near you. He is available for lunch."
-        return None
 
 
 class ArxivPlugin(ProactivePlugin):
@@ -67,9 +56,12 @@ class LocationPlugin(ProactivePlugin):
 scheduler = ProactiveScheduler(USER_PROMPT)
 scheduler.start_timer(interval_secs=1, event_name="every_second")
 scheduler.register_plugin(BitcoinPlugin(), "every_second")
-scheduler.register_plugin(FriendPlugin(), "every_second")
 scheduler.register_plugin(ArxivPlugin(), "every_second")
+<<<<<<< HEAD
 scheduler.register_plugin(LocationPlugin(), "every_second")
+=======
+scheduler.register_plugin(VoiceMailPlugin(), "every_second")
+>>>>>>> 8a1e4ef4f87441ce02ab083776589f76db7a22fb
 
 
 t = time.time()

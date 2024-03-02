@@ -22,7 +22,7 @@ class PlacesCategory(Enum):
     BOOKSTORE = 'BOOKSTORE'
 
 
-class NearbyPlacesPlugin():
+class NearbyPlacesPlugin(ProactivePlugin):
     def __init__(self):
         self.nearby_places_list = NEARBY_PLACES_LIST
         self.start_time = datetime.now().time()

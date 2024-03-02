@@ -1,27 +1,33 @@
 import os
-from openai import OpenAI
+import yaml
+from utils import get_client
 
 class PromptService:
-    def __init__(self):
-        self.key = os.environ.get("OPENAI_KEY")
-        self.client = OpenAI(api_key=self.key)
+    def __init__(self, prompt_name='default', preprompt=''):
+        self.client = get_client()
         self.context = []
-        self.system_content = """
-        You are a helpful and proactive assistant. You are able to periodically alert the user to important information.
-            
-        You receive formation tagged with "Context:" followed by information that may or may not matter to the user.
-        You receive periodic updates from multiple sources of information some of which are automated. This may result
-        in repeated information. Repetition of information need not be reported to the user.
-            
-        You are then asked periodically whether or not there is anything interesting to tell the user. Do not include
-        anything that the user is likely to know apriori, for example, the user likely already knows where they are or
-        what time it is.
-        """
+        prompt_file_path = os.path.join('prompts', f'{prompt_name}.yaml')
+        self.system_content = None
+        self.preprompt_command = None
+        self.invoke_command = None
+        try:
+            with open(prompt_file_path, 'r') as file:
+                data = yaml.safe_load(file)
+                self.system_content = data['SYSTEM']
+                self.preprompt_command = data['PREPROMPT'] + preprompt
+                self.invoke_command = data['INVOKE']
+        except FileNotFoundError:
+            print(f"File '{prompt_file_path}' not found.")
         system_message = {
             "role": "system",
             "content": self.system_content
         }
         self.context.append(system_message)
+        preprompt_message = {
+            "role": "user",
+            "content": self.preprompt_command
+        }
+        self.context.append(preprompt_message)
         
     
     def add_context(self, role, content):
@@ -33,6 +39,7 @@ class PromptService:
 
 
     def invoke_llm(self):
+        self.add_context(role="user", content=self.invoke_command)
         completion = self.client.chat.completions.create(
             model="gpt-4-0125-preview",
             messages=self.context
