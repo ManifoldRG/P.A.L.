@@ -1,5 +1,5 @@
 # P.A.L - Proactive Agent Library
-<img src='Group 51.png' width="100>
+<img src="Group 51.png" width="100">
 
 **P.A.L** is an easily customizable toolkit to build AI Agents that proactively interact w/ the world 
 
