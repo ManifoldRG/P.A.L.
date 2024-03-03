@@ -17,7 +17,10 @@ class ProactiveScheduler:
         for plugin in self.invocation_dict.get(event, []):
             additional_context = plugin.invoke(event)
             if additional_context is not None:
-                self.llm_service.add_context(role="user", content=f"Context: {additional_context}")
+                if type(additional_context) is str:
+                    self.llm_service.add_context(role="user", content=f"Context: {additional_context}")
+                else:
+                    self.llm_service.context.append(additional_context)
 
     def register_plugin(self, plugin: ProactivePlugin, event: str):
         if event in self.invocation_dict:
