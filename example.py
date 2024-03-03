@@ -6,11 +6,8 @@ from plugins.proactive_plugin import ProactivePlugin
 from plugins.voicemail.plugin import VoiceMailPlugin
 from plugins.vision.plugin import VisionPlugin
 from plugins.arxiv.plugin import ArxivPlugin
-<<<<<<< HEAD
 from plugins.health.plugin import HealthPlugin
-=======
 from plugins.chat_back.plugin import ChatBackPlugin
->>>>>>> chat-back
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
