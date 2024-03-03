@@ -89,12 +89,7 @@ def chat():
         file.truncate()  # Clear the file before rewriting
         json.dump(data, file)
 
-    try:
-        with open("events.json", "r") as file:
-            data = json.load(file)
-    except (FileNotFoundError, json.JSONDecodeError):
-        data = []
-    return jsonify(data)
+    return jsonify({"response": info})
 
 
 if __name__ == "__main__":
