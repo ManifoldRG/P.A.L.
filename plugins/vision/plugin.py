@@ -21,7 +21,6 @@ class VisionPlugin(ProactivePlugin):
 
     def invoke(self, event):
         if random.random() < 0.05 and self.triggered == False:
-            print("image triggered")
             self.triggered = True
             image_path = self.image_files[0]
             base64_image = encode_image(image_path)
