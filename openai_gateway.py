@@ -40,7 +40,8 @@ class PromptService:
     def invoke_llm(self):
         self.add_context(role="user", content=self.invoke_command)
         completion = self.client.chat.completions.create(
-            model="gpt-4-0125-preview",
-            messages=self.context
+            model="gpt-4-vision-preview",
+            messages=self.context,
+            max_tokens=300
         )
         return completion.choices[0].message.content

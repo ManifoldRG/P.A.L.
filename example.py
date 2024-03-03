@@ -4,13 +4,17 @@ import time
 from proactive_scheduler import ProactiveScheduler
 from plugins.proactive_plugin import ProactivePlugin
 from plugins.voicemail.plugin import VoiceMailPlugin
-from plugins.location.plugin import LocationPlugin
+from plugins.vision.plugin import VisionPlugin
+from plugins.arxiv.plugin import ArxivPlugin
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
 
 I am a busy startup founder and often get a ton of miss phone calls.
 Let me know if i have any important voicemails. plase ignore the spam.
+I am interested in events in my local area.
+I am a startup founder who needs to constantly stay updated about research involving language models. 
+Let me know if there are any papers relevant to my interests uploaded to Arxiv. If they are not relevant, please ignore the papers.
 
 I have the following friends:
 - Abhishek also an AI startup founder
@@ -22,42 +26,50 @@ I like coffee and finding different places to explore and work from."""
 class BitcoinPlugin(ProactivePlugin):
     def __init__(self):
         self.price = 60_000.0
-
     def invoke(self, event):
-        if random.random() < 0.05:
-            self.price = 100_000
-        if random.random() < 0.05:
-            self.price = 0
         return f"The price of bitcoin is ${self.price}."
 
 
-class ArxivPlugin(ProactivePlugin):
-    def __init__(self):
-        self.triggered = False
-
-    def invoke(self, event):
-        if random.random() < 0.05 and self.triggered == False:
-            self.triggered = True
-            return """
-New Arxiv paper:
-Title: Proactivity in AI Agents
-Author: Manny Miller"""
-        return None
-
-
 scheduler = ProactiveScheduler(USER_PROMPT)
-scheduler.start_timer(interval_secs=1, event_name="every_second")
-scheduler.register_plugin(BitcoinPlugin(), "every_second")
-scheduler.register_plugin(ArxivPlugin(), "every_second")
-scheduler.register_plugin(VoiceMailPlugin(), "every_second")
-scheduler.register_plugin(LocationPlugin(), "every_second")
+btc = BitcoinPlugin()
+scheduler.register_plugin(btc, "bitcoin-event")
+scheduler.register_plugin(ArxivPlugin(), "arxiv-event")
+scheduler.register_plugin(VoiceMailPlugin(), "voicemail-event")
+scheduler.register_plugin(VisionPlugin(), "vision-event")
 
-
-t = time.time()
-while True:
-    time.sleep(10)
-    scheduler.trigger_pending()
+def invoke_and_print(scheduler):
     info = scheduler.invoke_llm()
     if info != "None":
         print(info)
         print("---")
+
+
+btc.price = 60_301.46
+scheduler.trigger("bitcoin-event")
+invoke_and_print(scheduler)
+
+time.sleep(2)
+scheduler.trigger("arxiv-event")
+invoke_and_print(scheduler)
+
+time.sleep(0.5)
+btc.price = 60_302.11
+scheduler.trigger("bitcoin-event")
+btc.price = 60_305.22
+scheduler.trigger("bitcoin-event")
+invoke_and_print(scheduler)
+
+time.sleep(1)
+scheduler.trigger("vision-event")
+invoke_and_print(scheduler)
+
+time.sleep(2)
+scheduler.trigger("voicemail-event")
+invoke_and_print(scheduler)
+
+time.sleep(2)
+btc.price = 270_230.34
+scheduler.trigger("bitcoin-event")
+invoke_and_print(scheduler)
+
+invoke_and_print(scheduler)
