@@ -13,17 +13,13 @@ class VoiceMailPlugin(ProactivePlugin):
             os.path.join(current_dir, "samples", "abhishek.wav"),
         ]
         self.client = get_client()
-        self.triggered = False
 
     def invoke(self, event):
-        if random.random() < 0.05 and self.triggered == False:
-            self.triggered = True
-            transcripts = "Here are recent voicemail messages you may have missed:\n"
-            for idx, file_path in enumerate(self.audio_files):
-                with open(file_path, 'rb') as file:
-                    transcription = self.client.audio.transcriptions.create(
-                        model="whisper-1", file=file
-                    )
-                    transcripts += f"voice mail {idx + 1}: {transcription.text}\n\n"
-            return transcripts
-        return None
+        transcripts = "Here are recent voicemail messages you may have missed:\n"
+        for idx, file_path in enumerate(self.audio_files):
+            with open(file_path, 'rb') as file:
+                transcription = self.client.audio.transcriptions.create(
+                    model="whisper-1", file=file
+                )
+                transcripts += f"voice mail {idx + 1}: {transcription.text}\n\n"
+        return transcripts

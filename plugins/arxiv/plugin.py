@@ -83,27 +83,23 @@ class ArxivPlugin(ProactivePlugin):
 
 
     def invoke(self, event):
+        papers = self.retrieve_arxiv_results()
+        final_output = "New Arxiv papers:"
 
-        if random.random() < 0.05 and self.triggered == False:
-            self.triggered = True
-            papers = self.retrieve_arxiv_results()
-            final_output = "New Arxiv papers:"
-
-            if len(papers)==0:
-                return None
-            
-            else:
-
-                for paper in papers:
-
-                    final_output = final_output+'\nTitle: '+paper['title']
-                    final_output = final_output+'\nSummary: '+paper['summary']
-                    final_output = final_output+'\nFirst author: '+paper['first_author']
-                
-                #print(final_output)
-                return final_output
+        if len(papers)==0:
+            return None
         
-        return None
+        else:
+
+            for paper in papers:
+
+                final_output = final_output+'\nTitle: '+paper['title']
+                final_output = final_output+'\nSummary: '+paper['summary']
+                final_output = final_output+'\nFirst author: '+paper['first_author']
+            
+            #print(final_output)
+            return final_output
+        
 
 
 
