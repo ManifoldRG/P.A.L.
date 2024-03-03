@@ -19,6 +19,7 @@ def initialize_events_db():
 
 def run_events():
     global event_state
+    print('event state', event_state)
     while True:  # Infinite loop to run events
         info = ""
         # Your event logic (simplified for brevity)
@@ -58,7 +59,7 @@ def run_events():
                 file.truncate()  # Clear the file before rewriting
                 json.dump(data, file)
 
-        sleep(2)  # Wait for 2 seconds before the next event
+        sleep(5)  # Wait for 2 seconds before the next event
 
 
 @app.route("/get-event")
@@ -74,4 +75,4 @@ def get_event():
 if __name__ == "__main__":
     initialize_events_db()  # Reset the events database on start
     threading.Thread(target=run_events, daemon=True).start()
-    app.run(debug=True)
+    app.run(debug=False)
