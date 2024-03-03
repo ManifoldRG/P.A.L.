@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from example import scheduler, btc
 import json
@@ -64,6 +64,20 @@ def run_events():
 
 @app.route("/get-event")
 def get_event():
+    try:
+        with open("events.json", "r") as file:
+            data = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        data = []
+    return jsonify(data)
+
+
+@app.route("/chat", methods=['POST'])
+def chat():
+    data = request.json
+    chat_prompt = data['prompt']
+
+
     try:
         with open("events.json", "r") as file:
             data = json.load(file)

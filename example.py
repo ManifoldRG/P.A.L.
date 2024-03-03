@@ -6,7 +6,11 @@ from plugins.proactive_plugin import ProactivePlugin
 from plugins.voicemail.plugin import VoiceMailPlugin
 from plugins.vision.plugin import VisionPlugin
 from plugins.arxiv.plugin import ArxivPlugin
+<<<<<<< HEAD
 from plugins.health.plugin import HealthPlugin
+=======
+from plugins.chat_back.plugin import ChatBackPlugin
+>>>>>>> chat-back
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
@@ -40,10 +44,10 @@ scheduler.register_plugin(ArxivPlugin(), "arxiv-event")
 scheduler.register_plugin(VoiceMailPlugin(), "voicemail-event")
 scheduler.register_plugin(VisionPlugin(), "vision-event")
 scheduler.register_plugin(HealthPlugin(), "health-event")
+scheduler.register_plugin(ChatBackPlugin(), "chat-back-event")
 
-
-def invoke_and_print(scheduler):
-    info = scheduler.invoke_llm()
+def invoke_and_print(scheduler, custom_prompt = None):
+    info = scheduler.invoke_llm(custom_prompt)
     if info != "None":
         print(info)
         print("---")
@@ -69,6 +73,14 @@ if __name__ == "__main__":
     scheduler.trigger("bitcoin-event")
     invoke_and_print(scheduler)
 
+    scheduler.trigger("chat-back-event")
+    print()
+    invoke_and_print(scheduler, "Answer any questions the user had.")
+
+    time.sleep(1)
+    scheduler.trigger("vision-event")
+    invoke_and_print(scheduler)
+
     time.sleep(1)
     scheduler.trigger("vision-event")
     invoke_and_print(scheduler)
@@ -81,5 +93,18 @@ if __name__ == "__main__":
     btc.price = 270_230.34
     scheduler.trigger("bitcoin-event")
     invoke_and_print(scheduler)
+
+    invoke_and_print(scheduler)
+
+
+    time.sleep(2)
+    btc.price = 270_230.34
+    scheduler.trigger("bitcoin-event")
+    invoke_and_print(scheduler)
+
+
+    scheduler.trigger("chat-back-event")
+    print()
+    invoke_and_print(scheduler, "Answer any questions the user had.")
 
     invoke_and_print(scheduler)
