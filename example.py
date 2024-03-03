@@ -20,7 +20,7 @@ I have the following friends:
 - Abhishek also an AI startup founder
 - Manny Miller is an AI Researcher
 
-I like coffee and reading"""
+I like coffee and finding different places to explore and work from."""
 
 
 class BitcoinPlugin(ProactivePlugin):
