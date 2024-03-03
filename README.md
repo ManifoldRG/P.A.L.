@@ -12,13 +12,13 @@ According to Sam Altman, co-founder and CEO of OpenAI, proactive AI systems are 
 
 ## 🛠️ Key Features
 
-- **Easy-to-use** - With P.A.L, developers can flexibly build proactive agents that can track various signals by implementing custom plugins. We built an agent with 6 widely varying capabilities leveraging P.A.L in just 36 hours!
+- **Easy-to-use** - With P.A.L, developers can flexibly build proactive agents that can track various signals by implementing custom plugins. We built an agent with 5 widely varying capabilities leveraging P.A.L in just 36 hours!
 - **Multimodal and model agnostic** - Developers can plug and play with any SOTA Generative AI model(s) across all modalities.
 - **Task agnostic** - Developers can build for any use-case ranging from a personal agent to an enterprise-grade virtual shopping assistant.
 
 ## 💻 Quickstart
 
-To start using P.A.L, clone this repository, and install the environment requirements
+To start using P.A.L, clone this repository, and install the required environment libraries
 
 ```bash
 git clone https://github.com/harshsikka/ProactiveAgent.git
