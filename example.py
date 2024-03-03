@@ -6,6 +6,7 @@ from plugins.proactive_plugin import ProactivePlugin
 from plugins.voicemail.plugin import VoiceMailPlugin
 from plugins.vision.plugin import VisionPlugin
 from plugins.arxiv.plugin import ArxivPlugin
+from plugins.chat_back.plugin import ChatBackPlugin
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
@@ -36,9 +37,10 @@ scheduler.register_plugin(btc, "bitcoin-event")
 scheduler.register_plugin(ArxivPlugin(), "arxiv-event")
 scheduler.register_plugin(VoiceMailPlugin(), "voicemail-event")
 scheduler.register_plugin(VisionPlugin(), "vision-event")
+scheduler.register_plugin(ChatBackPlugin(), "chat-back-event")
 
-def invoke_and_print(scheduler):
-    info = scheduler.invoke_llm()
+def invoke_and_print(scheduler, custom_prompt = None):
+    info = scheduler.invoke_llm(custom_prompt)
     if info != "None":
         print(info)
         print("---")
@@ -59,6 +61,11 @@ btc.price = 60_305.22
 scheduler.trigger("bitcoin-event")
 invoke_and_print(scheduler)
 
+
+scheduler.trigger("chat-back-event")
+print()
+invoke_and_print(scheduler, "Answer any questions the user had.")
+
 time.sleep(1)
 scheduler.trigger("vision-event")
 invoke_and_print(scheduler)
@@ -67,9 +74,16 @@ time.sleep(2)
 scheduler.trigger("voicemail-event")
 invoke_and_print(scheduler)
 
+
+
 time.sleep(2)
 btc.price = 270_230.34
 scheduler.trigger("bitcoin-event")
 invoke_and_print(scheduler)
+
+
+scheduler.trigger("chat-back-event")
+print()
+invoke_and_print(scheduler, "Answer any questions the user had.")
 
 invoke_and_print(scheduler)

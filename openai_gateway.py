@@ -38,8 +38,9 @@ class PromptService:
         self.context.append(message)
 
 
-    def invoke_llm(self):
-        self.add_context(role="user", content=self.invoke_command)
+    def invoke_llm(self, custom_prompt = None):
+        prompt = self.invoke_command if custom_prompt is None else custom_prompt
+        self.add_context(role="user", content=prompt)
         completion = self.client.chat.completions.create(
             model="gpt-4-vision-preview",
             messages=self.context,

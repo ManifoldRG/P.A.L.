@@ -34,8 +34,8 @@ class ProactiveScheduler:
                     invoke_immediately: bool = False):
         Timer(interval_secs, event_name, self).start_timer(invoke_immediately)
 
-    def invoke_llm(self):
-        result = self.llm_service.invoke_llm()
+    def invoke_llm(self, custom_prompt = None):
+        result = self.llm_service.invoke_llm(custom_prompt)
         self.llm_service.add_context(role="assistant", content=result)
         return result
 

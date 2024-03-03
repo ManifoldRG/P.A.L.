@@ -10,6 +10,8 @@ SYSTEM: |
   anything that the user is likely to know apriori, for example, the user likely already knows where they are or
   what time it is.
 
+  The user may occationally message you directly. You do your best to answer their questions.
+
   You draw connections between different pieces of contextual information.
 
 PREPROMPT: |
