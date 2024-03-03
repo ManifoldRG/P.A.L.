@@ -4,7 +4,7 @@ from openai_gateway import PromptService
 
 
 class ProactiveScheduler:
-    def __init__(self, preprompt: str):
+    def __init__(self, preprompt: str, prompt_name: str):
         self.invocation_dict = dict()
         self.pending_events = []
         self.llm_service = PromptService(prompt_name='default', preprompt=preprompt)
