@@ -1,8 +1,4 @@
-<p align="center">
-
-# P.A.L - Proactive Agent Library
-
-</p>
+<h1 align="center"># P.A.L - Proactive Agent Library</h1>
 
 <p align="center">
 <img src="Group 51.png" width="150">
