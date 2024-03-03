@@ -5,6 +5,7 @@ from proactive_scheduler import ProactiveScheduler
 from plugins.proactive_plugin import ProactivePlugin
 from plugins.voicemail.plugin import VoiceMailPlugin
 from plugins.vision.plugin import VisionPlugin
+from plugins.arxiv.plugin import ArxivPlugin
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
@@ -12,6 +13,8 @@ I am heavily invested in bitcoin.
 I am a busy startup founder and often get a ton of miss phone calls.
 Let me know if i have any important voicemails. plase ignore the spam.
 I am interested in events in my local area.
+I am a startup founder who needs to constantly stay updated about research involving language models. 
+Let me know if there are any papers relevant to my interests uploaded to Arxiv. If they are not relevant, please ignore the papers.
 
 I have the following friends:
 - Abhishek also an AI startup founder
@@ -32,7 +35,7 @@ class BitcoinPlugin(ProactivePlugin):
         return f"The price of bitcoin is ${self.price}."
 
 
-class ArxivPlugin(ProactivePlugin):
+'''class ArxivPlugin(ProactivePlugin):
     def __init__(self):
         self.triggered = False
 
@@ -43,7 +46,7 @@ class ArxivPlugin(ProactivePlugin):
 New Arxiv paper:
 Title: Proactivity in AI Agents
 Author: Manny Miller"""
-        return None
+        return None'''
 
 
 scheduler = ProactiveScheduler(USER_PROMPT)
