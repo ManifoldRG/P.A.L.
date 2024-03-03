@@ -5,7 +5,6 @@ from proactive_scheduler import ProactiveScheduler
 from plugins.proactive_plugin import ProactivePlugin
 from plugins.voicemail.plugin import VoiceMailPlugin
 from plugins.vision.plugin import VisionPlugin
-from plugins.location.nearby_places_plugin import NearbyPlacesPlugin
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
@@ -53,7 +52,6 @@ scheduler.register_plugin(BitcoinPlugin(), "every_second")
 scheduler.register_plugin(ArxivPlugin(), "every_second")
 scheduler.register_plugin(VoiceMailPlugin(), "every_second")
 scheduler.register_plugin(VisionPlugin(), "every_second")
-scheduler.register_plugin(NearbyPlacesPlugin(), "every_second")
 
 
 t = time.time()

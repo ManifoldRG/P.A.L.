@@ -1,6 +1,7 @@
 from enum import Enum
 from datetime import datetime, time
 import json
+from ..proactive_plugin import ProactivePlugin
 
 """
 TODO:
