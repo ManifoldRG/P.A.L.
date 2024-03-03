@@ -35,3 +35,8 @@ To use the agent built using P.A.L
 ```bash
 python example.py
 ```
+## 🤔 What does P.A.L do?
+
+Here is a video showcasing the capabilities of a personal agent for an AI startup founder, that we built within 36 hours
+
+[!(https://img.youtube.com/vi/PcQ20g-Y_IM/0.jpg)](https://www.youtube.com/watch?v=PcQ20g-Y_IM)
