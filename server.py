@@ -20,9 +20,8 @@ def initialize_events_db():
 def run_events():
     global event_state
     print('event state', event_state)
-    while True:  # Infinite loop to run events
+    while True:
         info = ""
-        # Your event logic (simplified for brevity)
         if event_state == 0:
             btc.price = 60_301.46
             scheduler.trigger("bitcoin-event")
@@ -59,7 +58,7 @@ def run_events():
                 file.truncate()  # Clear the file before rewriting
                 json.dump(data, file)
 
-        sleep(5)  # Wait for 2 seconds before the next event
+        sleep(8)  # Wait for 2 seconds before the next event
 
 
 @app.route("/get-event")
@@ -74,6 +73,7 @@ def get_event():
 
 @app.route("/chat", methods=['POST'])
 def chat():
+    print('calling chat endpoint')
     data = request.json
     chat_prompt = data['prompt']
 

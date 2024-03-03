@@ -73,7 +73,7 @@ const UserMessage: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 interface ChatProps {
     messages: Message[];
-    onSubmit: (messages: Message[]) => void;
+    onSubmit: (messages: string) => void;
     isGenerating: boolean;
     className?: string;
     avatar?: string;
@@ -112,11 +112,11 @@ const ChatUI: React.FC<ChatProps> = ({
     const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
         if (e) e.preventDefault();
         if (input.trim()) {
-            const updatedMessages: Message[] = [
-                ...messages,
-                { role: "user", content: input.trim() }
-            ]
-            onSubmit(updatedMessages);
+            // const updatedMessages: Message[] = [
+            //     ...messages,
+            //     { role: "user", content: input.trim() }
+            // ]
+            onSubmit(input.trim());
             setInput('');
         }
     };
