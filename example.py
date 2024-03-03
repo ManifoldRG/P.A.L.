@@ -20,7 +20,7 @@ Let me know if there are any papers relevant to my interests uploaded to Arxiv. 
 I like to stay healthy and analyze my health stats weekly. I generally enjoy lifting, crossfit, running, and biking, and plan my workouts based on the weather.
 
 I have the following friends:
-- Abhishek also an AI startup founder
+- Abhishek also an AI startup founder who is interested in reading papers and attending conferences.
 - Manny Miller is an AI Researcher
 
 I like coffee and finding different places to explore and work from."""
@@ -46,7 +46,7 @@ scheduler.register_plugin(chat_back_plugin, "chat-back-event")
 
 def invoke_and_print(scheduler, custom_prompt = None):
     info = scheduler.invoke_llm(custom_prompt)
-    if info != "None":
+    if info != "None" and info != "None.":
         print(info)
         print("---")
 
@@ -56,53 +56,41 @@ if __name__ == "__main__":
     scheduler.trigger("bitcoin-event")
     invoke_and_print(scheduler)
 
-    time.sleep(2)
     scheduler.trigger("health-event")
     invoke_and_print(scheduler)
 
-    time.sleep(2)
     scheduler.trigger("arxiv-event")
     invoke_and_print(scheduler)
 
-    time.sleep(0.5)
     btc.price = 60_302.11
     scheduler.trigger("bitcoin-event")
     btc.price = 60_305.22
     scheduler.trigger("bitcoin-event")
     invoke_and_print(scheduler)
 
-    scheduler.trigger("chat-back-event")
-    print()
-    invoke_and_print(scheduler, "Answer any questions the user had.")
+    # scheduler.trigger("chat-back-event")
+    # print()
+    # invoke_and_print(scheduler, "Answer any questions the user had.")
 
-    time.sleep(1)
-    scheduler.trigger("vision-event")
-    invoke_and_print(scheduler)
-
-    time.sleep(1)
-    scheduler.trigger("vision-event")
-    invoke_and_print(scheduler)
-
-    time.sleep(2)
     scheduler.trigger("voicemail-event")
     invoke_and_print(scheduler)
 
-    time.sleep(2)
+    scheduler.trigger("vision-event")
+    invoke_and_print(scheduler)
+
     btc.price = 270_230.34
     scheduler.trigger("bitcoin-event")
     invoke_and_print(scheduler)
 
     invoke_and_print(scheduler)
 
-
-    time.sleep(2)
     btc.price = 270_230.34
     scheduler.trigger("bitcoin-event")
     invoke_and_print(scheduler)
 
 
-    scheduler.trigger("chat-back-event")
-    print()
-    invoke_and_print(scheduler, "Answer any questions the user had.")
+    # scheduler.trigger("chat-back-event")
+    # print()
+    # invoke_and_print(scheduler, "Answer any questions the user had.")
 
     invoke_and_print(scheduler)

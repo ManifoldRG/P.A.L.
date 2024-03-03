@@ -39,10 +39,10 @@ def run_events():
             btc.price = 60_305.22
             scheduler.trigger("bitcoin-event")
         elif event_state == 4:
-            scheduler.trigger("vision-event")
+            scheduler.trigger("voicemail-event")
             info = scheduler.invoke_llm()
         elif event_state == 5:
-            scheduler.trigger("voicemail-event")
+            scheduler.trigger("vision-event")
             info = scheduler.invoke_llm()
         elif event_state == 6:
             btc.price = 270_230.34
@@ -50,7 +50,7 @@ def run_events():
             info = scheduler.invoke_llm()
         event_state += 1
     
-        if info != "None" and info != "":
+        if info != "None" and info != "" and info != "None.":
             # Append the event info to the JSON database
             with open("events.json", "r+") as file:
                 data = json.load(file)
