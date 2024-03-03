@@ -6,6 +6,7 @@ from plugins.proactive_plugin import ProactivePlugin
 from plugins.voicemail.plugin import VoiceMailPlugin
 from plugins.vision.plugin import VisionPlugin
 from plugins.arxiv.plugin import ArxivPlugin
+from plugins.health.plugin import HealthPlugin
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
@@ -15,6 +16,7 @@ Let me know if i have any important voicemails. plase ignore the spam.
 I am interested in events in my local area.
 I am a startup founder who needs to constantly stay updated about research involving language models. 
 Let me know if there are any papers relevant to my interests uploaded to Arxiv. If they are not relevant, please ignore the papers.
+I like to stay healthy and analyze my health stats weekly. I generally enjoy lifting, crossfit, running, and biking, and plan my workouts based on the weather.
 
 I have the following friends:
 - Abhishek also an AI startup founder
@@ -36,6 +38,7 @@ scheduler.register_plugin(btc, "bitcoin-event")
 scheduler.register_plugin(ArxivPlugin(), "arxiv-event")
 scheduler.register_plugin(VoiceMailPlugin(), "voicemail-event")
 scheduler.register_plugin(VisionPlugin(), "vision-event")
+scheduler.register_plugin(HealthPlugin(), "health-event")
 
 def invoke_and_print(scheduler):
     info = scheduler.invoke_llm()
@@ -46,6 +49,10 @@ def invoke_and_print(scheduler):
 
 btc.price = 60_301.46
 scheduler.trigger("bitcoin-event")
+invoke_and_print(scheduler)
+
+time.sleep(2)
+scheduler.trigger("health-event")
 invoke_and_print(scheduler)
 
 time.sleep(2)
