@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function addUpdateToFeed(update) {
         const div = document.createElement('div');
         div.className = 'update';
-        // div.setAttribute('data-id', update.id); // Still setting data-id for potential future use
         div.innerHTML = `<p>${update.content}</p>`;
         // Adds the new update at the top of the feed
         feed.insertBefore(div, feed.firstChild);
