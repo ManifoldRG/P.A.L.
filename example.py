@@ -32,7 +32,7 @@ class BitcoinPlugin(ProactivePlugin):
         return f"The price of bitcoin is ${self.price}."
 
 
-scheduler = ProactiveScheduler(USER_PROMPT)
+scheduler = ProactiveScheduler(preprompt=USER_PROMPT, prompt_name='default')
 btc = BitcoinPlugin()
 scheduler.register_plugin(btc, "bitcoin-event")
 scheduler.register_plugin(ArxivPlugin(), "arxiv-event")
