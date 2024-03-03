@@ -4,11 +4,13 @@ import time
 from proactive_scheduler import ProactiveScheduler
 from plugins.proactive_plugin import ProactivePlugin
 from plugins.voicemail.plugin import VoiceMailPlugin
+from plugins.vision.plugin import VisionPlugin
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
 I am a busy startup founder and often get a ton of miss phone calls. 
 Let me know if i have any important voicemails. plase ignore the spam.
+I am interested in events in my local area.
 
 I have the following friends:
 - Abhishek also an AI startup founder
@@ -46,6 +48,7 @@ scheduler.start_timer(interval_secs=1, event_name="every_second")
 scheduler.register_plugin(BitcoinPlugin(), "every_second")
 scheduler.register_plugin(ArxivPlugin(), "every_second")
 scheduler.register_plugin(VoiceMailPlugin(), "every_second")
+scheduler.register_plugin(VisionPlugin(), "every_second")
 
 
 t = time.time()
