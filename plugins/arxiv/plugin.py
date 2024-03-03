@@ -1,5 +1,4 @@
 import random
-import arxiv
 import json, sys
 import requests
 from scholarly import scholarly
