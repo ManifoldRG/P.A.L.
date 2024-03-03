@@ -14,5 +14,4 @@ class HealthPlugin(ProactivePlugin):
         output = output+ "\nActive calories burnt over the past week: "+str(self.active_calories_burnt)
         output = output+ "\nStep count over the past week: "+str(self.steps)
         output = output+"\n This is the weather forecast for the upcoming week: "+str(self.future_weather_forecast)
-        print(output)
         return output

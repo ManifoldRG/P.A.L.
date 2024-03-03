@@ -28,6 +28,7 @@ I like coffee and finding different places to explore and work from."""
 class BitcoinPlugin(ProactivePlugin):
     def __init__(self):
         self.price = 60_000.0
+
     def invoke(self, event):
         return f"The price of bitcoin is ${self.price}."
 
@@ -40,6 +41,7 @@ scheduler.register_plugin(VoiceMailPlugin(), "voicemail-event")
 scheduler.register_plugin(VisionPlugin(), "vision-event")
 scheduler.register_plugin(HealthPlugin(), "health-event")
 
+
 def invoke_and_print(scheduler):
     info = scheduler.invoke_llm()
     if info != "None":
@@ -47,36 +49,37 @@ def invoke_and_print(scheduler):
         print("---")
 
 
-btc.price = 60_301.46
-scheduler.trigger("bitcoin-event")
-invoke_and_print(scheduler)
+if __name__ == "__main__":
+    btc.price = 60_301.46
+    scheduler.trigger("bitcoin-event")
+    invoke_and_print(scheduler)
 
-time.sleep(2)
-scheduler.trigger("health-event")
-invoke_and_print(scheduler)
+    time.sleep(2)
+    scheduler.trigger("health-event")
+    invoke_and_print(scheduler)
 
-time.sleep(2)
-scheduler.trigger("arxiv-event")
-invoke_and_print(scheduler)
+    time.sleep(2)
+    scheduler.trigger("arxiv-event")
+    invoke_and_print(scheduler)
 
-time.sleep(0.5)
-btc.price = 60_302.11
-scheduler.trigger("bitcoin-event")
-btc.price = 60_305.22
-scheduler.trigger("bitcoin-event")
-invoke_and_print(scheduler)
+    time.sleep(0.5)
+    btc.price = 60_302.11
+    scheduler.trigger("bitcoin-event")
+    btc.price = 60_305.22
+    scheduler.trigger("bitcoin-event")
+    invoke_and_print(scheduler)
 
-time.sleep(1)
-scheduler.trigger("vision-event")
-invoke_and_print(scheduler)
+    time.sleep(1)
+    scheduler.trigger("vision-event")
+    invoke_and_print(scheduler)
 
-time.sleep(2)
-scheduler.trigger("voicemail-event")
-invoke_and_print(scheduler)
+    time.sleep(2)
+    scheduler.trigger("voicemail-event")
+    invoke_and_print(scheduler)
 
-time.sleep(2)
-btc.price = 270_230.34
-scheduler.trigger("bitcoin-event")
-invoke_and_print(scheduler)
+    time.sleep(2)
+    btc.price = 270_230.34
+    scheduler.trigger("bitcoin-event")
+    invoke_and_print(scheduler)
 
-invoke_and_print(scheduler)
+    invoke_and_print(scheduler)
