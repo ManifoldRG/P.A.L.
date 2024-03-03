@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from example import scheduler, btc
+from example import scheduler, btc, chat_back_plugin
 import json
 import threading
 from time import sleep
@@ -77,6 +77,17 @@ def chat():
     data = request.json
     chat_prompt = data['prompt']
 
+    chat_back_plugin.prompt = chat_prompt
+    scheduler.trigger("chat-back-event")
+    chat_back_plugin.prompt = None
+    info = scheduler.invoke_llm("Answer any questions the user had.")
+    # Append the event info to the JSON database
+    with open("events.json", "r+") as file:
+        data = json.load(file)
+        data.append(info)
+        file.seek(0)
+        file.truncate()  # Clear the file before rewriting
+        json.dump(data, file)
 
     try:
         with open("events.json", "r") as file:

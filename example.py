@@ -44,7 +44,8 @@ scheduler.register_plugin(ArxivPlugin(), "arxiv-event")
 scheduler.register_plugin(VoiceMailPlugin(), "voicemail-event")
 scheduler.register_plugin(VisionPlugin(), "vision-event")
 scheduler.register_plugin(HealthPlugin(), "health-event")
-scheduler.register_plugin(ChatBackPlugin(), "chat-back-event")
+chat_back_plugin = ChatBackPlugin()
+scheduler.register_plugin(chat_back_plugin, "chat-back-event")
 
 def invoke_and_print(scheduler, custom_prompt = None):
     info = scheduler.invoke_llm(custom_prompt)
