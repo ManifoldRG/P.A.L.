@@ -28,8 +28,7 @@ class PromptService:
             "content": self.preprompt_command
         }
         self.context.append(preprompt_message)
-        
-    
+
     def add_context(self, role, content):
         message = {
             "role": role,

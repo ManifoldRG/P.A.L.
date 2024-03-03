@@ -4,6 +4,7 @@ import time
 from proactive_scheduler import ProactiveScheduler
 from plugins.proactive_plugin import ProactivePlugin
 from plugins.voicemail.plugin import VoiceMailPlugin
+from plugins.location.plugin import LocationPlugin
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
@@ -15,7 +16,7 @@ I have the following friends:
 - Abhishek also an AI startup founder
 - Manny Miller is an AI Researcher
 
-I like coffee and reading"""
+I like coffee and finding different places to explore and work from."""
 
 
 class BitcoinPlugin(ProactivePlugin):
