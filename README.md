@@ -1,5 +1,6 @@
 # P.A.L - Proactive Agent Library
-<img src='Group 51.png'>
+<img src='Group 51.png' width="100>
+
 **P.A.L** is an easily customizable toolkit to build AI Agents that proactively interact w/ the world 
 
 ## 🚀 Motivation
@@ -19,7 +20,7 @@ To start using P.A.L, clone this repository, and install the environment require
 ```bash
 git clone https://github.com/harshsikka/ProactiveAgent.git
 ```
-Create and activate a virtual environment
+After creating and activating a virtual environment
 
 ```bash
 pip install -r requirements.txt
@@ -31,7 +32,7 @@ To use the agent built using P.A.L
 python example.py
 ```
 
-## 🤔 What can P.A.L do?**
+## 🤔 What can P.A.L do?
 
 Here is a video showcasing the capabilities of a personal agent for an AI startup foudner that we built within 36 hours
 
