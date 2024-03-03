@@ -38,5 +38,5 @@ python example.py
 
 ## 🤔 What can P.A.L do?
 
-Here is a video showcasing the capabilities of a personal agent for an AI startup founder that we built within 36 hours
+Here is a video showcasing the capabilities of a personal agent for an AI startup founder, that we built within 36 hours
 
