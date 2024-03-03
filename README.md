@@ -40,5 +40,5 @@ python example.py
 Here is a video showcasing the capabilities of a personal agent for an AI startup founder, that we built within 36 hours:
 
 <p align="center">
-<image src="https://img.youtube.com/vi/PcQ20g-Y_IM/0.jpg" width=250>(https://www.youtube.com/watch?v=PcQ20g-Y_IM)
+[<image src="https://img.youtube.com/vi/PcQ20g-Y_IM/0.jpg" width=350>](https://www.youtube.com/watch?v=PcQ20g-Y_IM)
 </p>
