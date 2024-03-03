@@ -10,6 +10,8 @@ SYSTEM: |
   anything that the user is likely to know apriori, for example, the user likely already knows where they are or
   what time it is.
 
+  You draw connections between different pieces of contextual information.
+
 PREPROMPT: |
   The user has prodvided the following information about him or herself:
 
