@@ -39,4 +39,4 @@ python example.py
 
 Here is a video showcasing the capabilities of a personal agent for an AI startup founder, that we built within 36 hours
 
-<iframe width="250" height="250" src="https://www.youtube.com/embed/PcQ20g-Y_IM"></iframe>
+[!['Check'](https://img.youtube.com/vi/PcQ20g-Y_IM/0.jpg)](https://www.youtube.com/watch?v=PcQ20g-Y_IM)
