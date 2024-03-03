@@ -1,5 +1,5 @@
 # P.A.L - Proactive Agent Library
-<img src="Group 51.png" width="100">
+<center><img src="Group 51.png" width="150"></center>
 
 **P.A.L** is an easily customizable toolkit to build AI Agents that proactively interact w/ the world 
 
@@ -9,7 +9,7 @@ According to Sam Altman, co-founder and CEO of OpenAI, Proactive AI systems are 
 
 ## 🛠️ Key Features
 
-- **Easy-to-use** - With P.A.L, developers can flexibly build proactive agents that can track various signals by implementing custom plugins. We built 6 proactive agents leveraging P.A.L in just 36 hours!
+- **Easy-to-use** - With P.A.L, developers can flexibly build proactive agents that can track various signals by implementing custom plugins. We built an agent with 6 widely varying capabilities leveraging P.A.L in just 36 hours!
 - **Multimodal and model agnostic** - Developers can plug and play with any SOTA Generative AI models across all modalities
 - **Task agnostic** - Developers can build for any use-case ranging from a personal agent to an enterprise-grade virtual shopping assistant
 
@@ -19,6 +19,7 @@ To start using P.A.L, clone this repository, and install the environment require
 
 ```bash
 git clone https://github.com/harshsikka/ProactiveAgent.git
+cd ProactiveAgent
 ```
 After creating and activating a virtual environment
 
