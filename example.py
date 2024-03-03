@@ -8,6 +8,7 @@ from plugins.vision.plugin import VisionPlugin
 from plugins.arxiv.plugin import ArxivPlugin
 from plugins.health.plugin import HealthPlugin
 from plugins.chat_back.plugin import ChatBackPlugin
+from plugins.location.plugin import LocationPlugin
 
 USER_PROMPT = """
 I am heavily invested in bitcoin.
@@ -41,6 +42,7 @@ scheduler.register_plugin(ArxivPlugin(), "arxiv-event")
 scheduler.register_plugin(VoiceMailPlugin(), "voicemail-event")
 scheduler.register_plugin(VisionPlugin(), "vision-event")
 scheduler.register_plugin(HealthPlugin(), "health-event")
+scheduler.register_plugin(LocationPlugin(), "location-event")
 chat_back_plugin = ChatBackPlugin()
 scheduler.register_plugin(chat_back_plugin, "chat-back-event")
 
@@ -64,6 +66,7 @@ if __name__ == "__main__":
 
     btc.price = 60_302.11
     scheduler.trigger("bitcoin-event")
+    btc.price = 60_302.11
     btc.price = 60_305.22
     scheduler.trigger("bitcoin-event")
     invoke_and_print(scheduler)
@@ -72,6 +75,7 @@ if __name__ == "__main__":
     # print()
     # invoke_and_print(scheduler, "Answer any questions the user had.")
 
+    scheduler.trigger("location-event")
     scheduler.trigger("voicemail-event")
     invoke_and_print(scheduler)
 

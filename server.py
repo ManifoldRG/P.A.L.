@@ -38,6 +38,7 @@ def run_events():
             btc.price = 60_305.22
             scheduler.trigger("bitcoin-event")
         elif event_state == 4:
+            scheduler.trigger("location-event")
             scheduler.trigger("voicemail-event")
             info = scheduler.invoke_llm()
         elif event_state == 5:

@@ -35,13 +35,10 @@ class LocationPlugin(ProactivePlugin):
 
 
     def invoke(self, event):
-        if random.random() < 0.05 and self.triggered == False:
-            self.triggered = True
-            if self.nearby_places_list:
-                transcripts = "Here are nearby places you may enjoy"
-                transcripts += str(json.dumps(self.nearby_places_list.pop(0), indent=2))
-                return transcripts
-        return None
+        if self.nearby_places_list:
+            transcripts = "Nearby locations: "
+            transcripts += str(json.dumps(self.nearby_places_list.pop(0), indent=2))
+            return transcripts
 
 
 NEARBY_PLACES_LIST = [
